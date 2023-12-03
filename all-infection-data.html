@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>COVID-19 Data</title>
+  <link rel="stylesheet" type="text/css" href="styles01.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<main>
+    </div>
+            <ul class="nav-area">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About COVID-19</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="all-infection-data.html">All Infection Data</a></li>
+            </ul>
+<body>
+  <br><br><br><h1>COVID-19 Data</h1>
+  <br><button id="showButton">Show</button><br>
+  <div class="fancy-section">
+    <br><h2>Total Cases:</h2>
+    <span id="totalCases"></span>
+  </div>
+  <div class="fancy-section">
+    <br><h2>Total Deaths:</h2>
+    <span id="totalDeaths"></span>
+  </div>
+  <div class="fancy-section">
+    <h2>Total Recovered:</h2>
+    <span id="totalRecovered"></span>
+  </div>
+
+  <script>
+    $(document).ready(function(){
+    $("#showButton").click(function(){
+      // AJAX request to fetch COVID-19 data
+      $.ajax({
+        url: "https://disease.sh/v3/covid-19/all",
+        method: "GET",
+        success: function(data){
+          // Display the data
+          $("#totalCases").text(data.cases.toLocaleString());
+          $("#totalDeaths").text(data.deaths.toLocaleString());
+          $("#totalRecovered").text(data.recovered.toLocaleString());
+        },
+        error: function(){
+          console.log("Error fetching COVID-19 data");
+        }
+      });
+    });
+  
+    // Other button click handlers and code...
+  });
+</script>
+</body>
+</html>
